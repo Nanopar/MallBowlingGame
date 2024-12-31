@@ -1,3 +1,46 @@
-[gd_scene format=3 uid="uid://vo6vi3qpiqjp"]
+[gd_scene load_steps=4 format=3 uid="uid://vo6vi3qpiqjp"]
+
+[ext_resource type="Material" uid="uid://dxwe36ou1plyg" path="res://TexturesAndMaterials/Grid.tres" id="1_j0ml7"]
+[ext_resource type="PackedScene" uid="uid://yk7ucwnvv6jh" path="res://Scenes/gameplayer.tscn" id="2_ie775"]
+
+[sub_resource type="Environment" id="Environment_kvuic"]
+background_mode = 1
+background_color = Color(0.700612, 0.826437, 0.942001, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.342092, 0.359069, 0.434624, 1)
+tonemap_mode = 3
+ssao_enabled = true
 
 [node name="Node3D" type="Node3D"]
+
+[node name="Map" type="Node3D" parent="."]
+
+[node name="TestingMap" type="CSGCombiner3D" parent="Map"]
+material_override = ExtResource("1_j0ml7")
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Map/TestingMap"]
+size = Vector3(31.665, 0.126953, 32.0369)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Map/TestingMap"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.93652, -13.0184)
+size = Vector3(31.665, 4, 6)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Map/TestingMap"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.936523, -7.01845)
+size = Vector3(20, 2, 6)
+
+[node name="Lighting" type="Node3D" parent="Map"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Map/Lighting"]
+environment = SubResource("Environment_kvuic")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Map/Lighting"]
+transform = Transform3D(0.5, 0.575067, -0.647532, 0.866025, -0.332015, 0.373853, 0, -0.747705, -0.664031, 0, 0, 0)
+shadow_enabled = true
+
+[node name="ReflectionProbe" type="ReflectionProbe" parent="Map/Lighting"]
+size = Vector3(33.5645, 20, 32.7588)
+
+[node name="Player" parent="." instance=ExtResource("2_ie775")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.391242, 0.903967, 3.80669)
