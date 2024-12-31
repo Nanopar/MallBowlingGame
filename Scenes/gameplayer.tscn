@@ -83,8 +83,7 @@ _data = {
 [node name="Player" type="CharacterBody3D" groups=["PLAYER"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.84049, 0)
 script = ExtResource("1_xeff5")
-JUMP_VELOCITY = 6.25
-SPRINTING_SPEED = 16.0
+JUMP_VELOCITY = 12.5
 LERP_SPEED = 6.0
 AIR_LERP_SPEED = 2.0
 SLIDING_SPEED = 24.0
@@ -109,7 +108,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, 0)
 target_position = Vector3(0, 1.6, 0)
 
 [node name="Neck" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.37861, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.22872, 0)
 
 [node name="Head" type="Node3D" parent="Neck"]
 

@@ -34,6 +34,8 @@ var last_velocity = Vector3.ZERO
 var stand_after_roll = false
 var playerPaused = false;
 
+var gainingSpeed = 0;
+
 @export var OFFLINE = false;
 
 func _ready():
@@ -66,7 +68,7 @@ func _physics_process(delta):
 		return;
 	var input_dir = Input.get_vector("left", "right", "forward", "back")
 	var eVel = velocity * transform.basis
-	$Neck.rotation.z = lerp($Neck.rotation.z,eVel.x*-0.015,0.15);
+	$Neck.rotation.z = lerp($Neck.rotation.z,eVel.x*-0.01,0.15);
 	if stand_after_roll:
 		$Neck/Head.position.y = lerp($Neck/Head.position.y, 0.0, delta * LERP_SPEED)
 		$StandingCollisionShape.disabled = true
@@ -82,6 +84,7 @@ func _physics_process(delta):
 		wiggle_current_intensity = WIGGLE_ON_CROUCHING_INTENSITY
 		wiggle_index += WIGGLE_ON_CROUCHING_SPEED * delta
 		if is_sprinting and input_dir != Vector2.ZERO and is_on_floor():
+			
 			$SlidingTimer.start()
 			slide_vector = input_dir
 		elif !Input.is_action_pressed("sprint"):
@@ -187,20 +190,30 @@ func _physics_process(delta):
 	else:
 		direction = (transform.basis * Vector3(slide_vector.x, 0.0, slide_vector.y)).normalized()
 		current_speed = ($SlidingTimer.time_left / $SlidingTimer.wait_time + 0.5) * SLIDING_SPEED
-	
+		
 	current_speed = clamp(current_speed, 3.0, 24.0)
 	
 	if direction:
-		velocity.x = direction.x * current_speed
-		velocity.z = direction.z * current_speed
+		velocity.x = direction.x * current_speed * gainingSpeed
+		velocity.z = direction.z * current_speed * gainingSpeed
 	else:
 		velocity.x = move_toward(velocity.x, 0, current_speed)
 		velocity.z = move_toward(velocity.z, 0, current_speed)
 	
 	last_velocity = velocity
 	
+	var checkVel = velocity * transform.basis
+	if(abs(checkVel.z) > 9):
+		pass
+	else:
+		pass
+	if(is_sprinting):
+		gainingSpeed = clampf(gainingSpeed + delta*0.8, 1, 1.8);
+	else:
+		gainingSpeed = clampf(gainingSpeed - delta*1.5, 1, 1.8);
+	print(gainingSpeed)
 	move_and_slide()
-
+	
 
 func _on_sliding_timer_timeout():
 	is_free_looking = false
