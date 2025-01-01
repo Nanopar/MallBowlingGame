@@ -1,21 +1,9 @@
-[gd_scene load_steps=21 format=3 uid="uid://vo6vi3qpiqjp"]
+[gd_scene load_steps=6 format=3 uid="uid://vo6vi3qpiqjp"]
 
 [ext_resource type="Material" uid="uid://dxwe36ou1plyg" path="res://TexturesAndMaterials/Grid.tres" id="1_j0ml7"]
 [ext_resource type="Script" path="res://mallGenerator.gd" id="1_rylgc"]
 [ext_resource type="PackedScene" uid="uid://b7gngfkai7l5" path="res://Scenes/chunk.tscn" id="2_50ka6"]
-[ext_resource type="PackedScene" uid="uid://yk7ucwnvv6jh" path="res://Scenes/gameplayer.tscn" id="2_ie775"]
-[ext_resource type="Resource" uid="uid://cslvcweyejh3c" path="res://addons/SphynxMotionBlurToolkit/PreBlurProcessing/default_camera_movement_component.tres" id="2_rk4om"]
-[ext_resource type="Resource" uid="uid://iru8ynu04i00" path="res://addons/SphynxMotionBlurToolkit/PreBlurProcessing/default_camera_rotation_component.tres" id="3_ku8k8"]
-[ext_resource type="Resource" uid="uid://rp3mpjmisoyh" path="res://addons/SphynxMotionBlurToolkit/PreBlurProcessing/default_object_movement_component.tres" id="4_j2ym4"]
-[ext_resource type="Resource" uid="uid://c8ulad7utgrg7" path="res://addons/SphynxMotionBlurToolkit/PreBlurProcessing/pre_blur_processing_stage.tres" id="5_3nkpn"]
-[ext_resource type="Script" path="res://addons/SphynxMotionBlurToolkit/PreBlurProcessing/pre_blur_processor.gd" id="6_p71ed"]
-[ext_resource type="Resource" uid="uid://ceav72kvj4qbw" path="res://addons/SphynxMotionBlurToolkit/JumpFlood/realistic_jf_blur_stage.tres" id="7_k72tp"]
-[ext_resource type="Resource" uid="uid://bj3exhmsfcx4w" path="res://addons/SphynxMotionBlurToolkit/JumpFlood/jf_simple_stage.tres" id="8_w8rgv"]
-[ext_resource type="Resource" uid="uid://co5k7plgmxepi" path="res://addons/SphynxMotionBlurToolkit/JumpFlood/jump_flood_neighbor_max_stage.tres" id="9_q0eyu"]
-[ext_resource type="Resource" uid="uid://dc5fr84ue3dn5" path="res://addons/SphynxMotionBlurToolkit/JumpFlood/jump_flood_overlay_stage.tres" id="10_rcm78"]
-[ext_resource type="Script" path="res://addons/SphynxMotionBlurToolkit/JumpFlood/realistic_jf_motion_blur.gd" id="11_867wb"]
-[ext_resource type="Resource" uid="uid://c10aboaly701b" path="res://addons/SphynxMotionBlurToolkit/JumpFlood/jump_flood_tile_max_x_stage.tres" id="12_348yl"]
-[ext_resource type="Resource" uid="uid://cymk87e4nyxva" path="res://addons/SphynxMotionBlurToolkit/JumpFlood/jump_flood_tile_max_y_stage.tres" id="13_doma4"]
+[ext_resource type="Script" path="res://camera.gd" id="17_a6ile"]
 
 [sub_resource type="Environment" id="Environment_kvuic"]
 background_mode = 1
@@ -29,49 +17,13 @@ sdfgi_y_scale = 0
 sdfgi_energy = 0.025
 glow_enabled = true
 
-[sub_resource type="CompositorEffect" id="CompositorEffect_j4cno"]
-resource_local_to_scene = false
-resource_name = ""
-enabled = true
-effect_callback_type = 4
-needs_motion_vectors = false
-needs_normal_roughness = false
-script = ExtResource("6_p71ed")
-pre_blur_processor_stage = ExtResource("5_3nkpn")
-camera_rotation_component = ExtResource("3_ku8k8")
-camera_movement_component = ExtResource("2_rk4om")
-object_movement_component = ExtResource("4_j2ym4")
-debug = false
-
-[sub_resource type="CompositorEffect" id="CompositorEffect_k107a"]
-resource_local_to_scene = false
-resource_name = ""
-enabled = true
-effect_callback_type = 4
-needs_motion_vectors = false
-needs_normal_roughness = false
-script = ExtResource("11_867wb")
-tile_max_x_stage = ExtResource("12_348yl")
-tile_max_y_stage = ExtResource("13_doma4")
-construct_stage = ExtResource("8_w8rgv")
-neighbor_max_stage = ExtResource("9_q0eyu")
-blur_stage = ExtResource("7_k72tp")
-overlay_stage = ExtResource("10_rcm78")
-perpen_error_threshold = 0.5
-sample_step_multiplier = 16
-step_exponent_modifier = 1.0
-JFA_pass_count = 3
-debug = false
-
-[sub_resource type="Compositor" id="Compositor_k4s5f"]
-compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_j4cno"), SubResource("CompositorEffect_k107a")])
-
 [node name="Node3D" type="Node3D"]
 
 [node name="Map" type="Node3D" parent="."]
 
-[node name="Mall" type="Node3D" parent="Map"]
+[node name="Mall" type="Node3D" parent="Map" node_paths=PackedStringArray("canvas")]
 script = ExtResource("1_rylgc")
+canvas = NodePath("../../CanvasLayer")
 
 [node name="Chunk" parent="Map/Mall" instance=ExtResource("2_50ka6")]
 
@@ -141,10 +93,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1.43652, -9.01845)
 size = Vector3(20, 3, 2)
 
 [node name="Lighting" type="Node3D" parent="Map"]
+visible = false
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Map/Lighting"]
 environment = SubResource("Environment_kvuic")
-compositor = SubResource("Compositor_k4s5f")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Map/Lighting"]
 transform = Transform3D(0.5, 0.575067, -0.647532, 0.866025, -0.332015, 0.373853, 0, -0.747705, -0.664031, 0, 0, 0)
@@ -155,5 +107,32 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -51.9783, 0, -132.935)
 intensity = 0.8
 size = Vector3(91.563, 20, 125.853)
 
-[node name="Player" parent="." instance=ExtResource("2_ie775")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -65.7431, 0.903967, -138.842)
+[node name="FreeLookCamera" type="Camera3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, -2.26267e-08, 0.965926, 0.258819, 8.44439e-08, 0.258819, -0.965926, 0, 18.0032, -31.4535)
+script = ExtResource("17_a6ile")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Generating" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Generating"]
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(1, 1, 1, 0.270588)
+
+[node name="Label" type="Label" parent="CanvasLayer/Generating"]
+layout_mode = 0
+offset_left = 554.0
+offset_top = 324.0
+offset_right = 740.0
+offset_bottom = 366.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 3
+theme_override_font_sizes/font_size = 30
+text = "Generating..."
