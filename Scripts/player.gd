@@ -1,15 +1,15 @@
 extends CharacterBody3D
 
-@export var JUMP_VELOCITY = 4.5
+@export var JUMP_VELOCITY = 12.5
 @export var WALKING_SPEED = 5.0
 @export var SPRINTING_SPEED = 8.0
 @export var CROUCHING_SPEED = 3.0
 @export var CROUCHING_DEPTH = -0.9
 @export var MOUSE_SENS = 0.25
-@export var LERP_SPEED = 10.0
-@export var AIR_LERP_SPEED = 6.0
+@export var LERP_SPEED = 6
+@export var AIR_LERP_SPEED = 6
 @export var FREE_LOOK_TILT_AMOUNT = 5.0
-@export var SLIDING_SPEED = 5.0
+@export var SLIDING_SPEED = 24
 @export var WIGGLE_ON_WALKING_SPEED = 14.0
 @export var WIGGLE_ON_SPRINTING_SPEED = 22.0
 @export var WIGGLE_ON_CROUCHING_SPEED = 10.0
@@ -36,6 +36,12 @@ var playerPaused = false;
 
 var gainingSpeed = 0;
 
+var bottomStepCollide = false;
+var topStepCollide = false;
+
+var bobbing = 0;
+var bobbingMultiplier = 0;
+var bobbingSpeed = 1;
 @export var OFFLINE = false;
 
 func _ready():
@@ -66,6 +72,10 @@ func _input(event):
 func _physics_process(delta):
 	if(!OFFLINE && !is_multiplayer_authority()):
 		return;
+
+	if(true):
+		if(bottomStepCollide && !topStepCollide):
+			global_position.y += 0.57;
 	var input_dir = Input.get_vector("left", "right", "forward", "back")
 	var eVel = velocity * transform.basis
 	$Neck.rotation.z = lerp($Neck.rotation.z,eVel.x*-0.01,0.15);
@@ -78,7 +88,7 @@ func _physics_process(delta):
 	if Input.is_action_pressed("crouch") or $RayCast.is_colliding():
 		if is_on_floor():
 			current_speed = lerp(current_speed, CROUCHING_SPEED, delta * LERP_SPEED)
-		$Neck/Head.position.y = lerp($Neck/Head.position.y, CROUCHING_DEPTH, delta * LERP_SPEED)
+		$Neck/Head.position.y = lerp($Neck/Head.position.y, CROUCHING_DEPTH, delta * 15)
 		$StandingCollisionShape.disabled = true
 		$CrouchingCollisionShape.disabled = false
 		wiggle_current_intensity = WIGGLE_ON_CROUCHING_INTENSITY
@@ -93,7 +103,7 @@ func _physics_process(delta):
 		is_sprinting = false
 		is_crouching = true
 	else:
-		$Neck/Head.position.y = lerp($Neck/Head.position.y, 0.0, delta * LERP_SPEED)
+		$Neck/Head.position.y = lerp($Neck/Head.position.y, 0.0, delta * 8)
 		$StandingCollisionShape.disabled = false
 		$CrouchingCollisionShape.disabled = true
 		$SlidingTimer.stop()
@@ -221,3 +231,18 @@ func _on_sliding_timer_timeout():
 
 func _on_animation_player_animation_finished(anim_name):
 	stand_after_roll = anim_name == 'roll' and !is_crouching
+
+
+func bottomStepEnter(body):
+	if(body != self):
+		bottomStepCollide = true;
+func bottomStepExit(body):
+	if(body != self):
+		bottomStepCollide = false;
+
+func topStepEntered(body):
+	if(body != self):
+		topStepCollide = true;
+func topStepExit(body):
+	if(body != self):
+		topStepCollide = false;

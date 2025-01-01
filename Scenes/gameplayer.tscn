@@ -1,10 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://yk7ucwnvv6jh"]
+[gd_scene load_steps=10 format=3 uid="uid://yk7ucwnvv6jh"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_xeff5"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_26tbo"]
-radius = 0.416651
-height = 2.53627
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_58j7j"]
+height = 0.067
+radius = 0.455
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_xkqhi"]
+height = 2.5
+radius = 0.4
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fgxde"]
 radius = 0.393053
@@ -83,10 +87,20 @@ _data = {
 [node name="Player" type="CharacterBody3D" groups=["PLAYER"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.84049, 0)
 script = ExtResource("1_xeff5")
-JUMP_VELOCITY = 12.5
-LERP_SPEED = 6.0
-AIR_LERP_SPEED = 2.0
-SLIDING_SPEED = 24.0
+
+[node name="stepChecker" type="Node3D" parent="."]
+
+[node name="bottom" type="Area3D" parent="stepChecker"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.60678, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="stepChecker/bottom"]
+shape = SubResource("CylinderShape3D_58j7j")
+
+[node name="top" type="Area3D" parent="stepChecker"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.227968, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="stepChecker/top"]
+shape = SubResource("CylinderShape3D_58j7j")
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.493968, 0)
@@ -96,7 +110,7 @@ smooth_faces = false
 
 [node name="StandingCollisionShape" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46469, 0)
-shape = SubResource("CapsuleShape3D_26tbo")
+shape = SubResource("CylinderShape3D_xkqhi")
 
 [node name="CrouchingCollisionShape" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.272641, 0)
@@ -125,5 +139,9 @@ libraries = {
 wait_time = 1.5
 one_shot = true
 
+[connection signal="body_entered" from="stepChecker/bottom" to="." method="bottomStepEnter"]
+[connection signal="body_exited" from="stepChecker/bottom" to="." method="bottomStepExit"]
+[connection signal="body_entered" from="stepChecker/top" to="." method="topStepEntered"]
+[connection signal="body_exited" from="stepChecker/top" to="." method="topStepExit"]
 [connection signal="animation_finished" from="Neck/Head/Eyes/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="SlidingTimer" to="." method="_on_sliding_timer_timeout"]
