@@ -27,12 +27,15 @@ func gen():
 			newChunk.global_position.z = y * 16;
 			var models = newChunk.get_node("Models").get_children();
 			var pick;
-			if(randi_range(0, 2) == 1):
+			if(randi_range(0,10) >= 4):
 				pick = models.pick_random();
 			else:
 				pick = models[0];
+			if pick.name == "3":
+				var Arotation = [0,90,180,270];
+				pick.rotation_degrees.y = Arotation.pick_random()
 			pick.show();
-			await get_tree().create_timer(0.01).timeout
+			await get_tree().create_timer(0.00000000000000000001).timeout
 	await get_tree().create_timer(1).timeout
 	canvas.get_node("Generating").hide();
 	pass # Replace with function body.
