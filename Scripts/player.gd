@@ -246,6 +246,7 @@ func handleSprintLimit(delta):
 		print("SPRINT")
 		if(timerSprint <= 0):
 			canvas.get_node("energyBar").frame -= 1;
+			
 			timerSprint = 0.05;
 		else:
 			timerSprint -= delta;
