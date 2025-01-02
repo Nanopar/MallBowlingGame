@@ -17,6 +17,7 @@ extends CharacterBody3D
 @export var WIGGLE_ON_SPRINTING_INTENSITY = 0.2
 @export var WIGGLE_ON_CROUCHING_INTENSITY = 0.05
 @export var BUNNY_HOP_ACCELERATION = 0.1
+@export var canvas : CanvasLayer = null;
 
 var current_speed = 5.0
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -230,13 +231,26 @@ func _physics_process(delta):
 		pass
 	else:
 		pass
+	handleSprintLimit(delta);
 	if(is_sprinting):
 		gainingSpeed = clampf(gainingSpeed + delta*0.8, 1, 1.8);
+		
 	else:
 		gainingSpeed = clampf(gainingSpeed - delta*1.5, 1, 1.8);
-	print(gainingSpeed)
+	#print(gainingSpeed)
 	move_and_slide()
 	
+var timerSprint = 0.05;
+func handleSprintLimit(delta):
+	if(is_sprinting):
+		print("SPRINT")
+		if(timerSprint <= 0):
+			canvas.get_node("energyBar").frame -= 1;
+			timerSprint = 0.05;
+		else:
+			timerSprint -= delta;
+	else:
+		canvas.get_node("energyBar").frame += ceilf(delta * 0.025);
 
 func _on_sliding_timer_timeout():
 	is_free_looking = false

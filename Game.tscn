@@ -138,17 +138,19 @@ theme_override_constants/shadow_offset_y = 3
 theme_override_font_sizes/font_size = 30
 text = "Generating..."
 
-[node name="Player" parent="." instance=ExtResource("4_rcyw2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.83972, 3.55479, 3.42477)
-
-[node name="Energy bar" type="Sprite2D" parent="."]
+[node name="energyBar" type="Sprite2D" parent="CanvasLayer"]
+texture_filter = 1
 position = Vector2(669, 693)
 scale = Vector2(6.56, 3.89286)
 texture = ExtResource("5_v2ed1")
 vframes = 101
 frame = 100
 
-[node name="BG" type="Sprite2D" parent="Energy bar"]
+[node name="BG" type="Sprite2D" parent="CanvasLayer/energyBar"]
 show_behind_parent = true
 scale = Vector2(100.55, 2.80367)
 texture = ExtResource("6_u0xeo")
+
+[node name="Player" parent="." node_paths=PackedStringArray("canvas") instance=ExtResource("4_rcyw2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.83972, 3.55479, 3.42477)
+canvas = NodePath("../CanvasLayer")

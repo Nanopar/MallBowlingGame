@@ -20,8 +20,8 @@ func _process(delta):
 		gen();
 
 func gen():
-	for x in range(8):
-		for y in range(8):
+	for x in range(4):
+		for y in range(4):
 			var newChunk = chunkInstance.instantiate()
 			add_child(newChunk)
 			newChunk.global_position.x = x * 16;
