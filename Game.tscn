@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://vo6vi3qpiqjp"]
+[gd_scene load_steps=5 format=3 uid="uid://vo6vi3qpiqjp"]
 
 [ext_resource type="Material" uid="uid://dxwe36ou1plyg" path="res://TexturesAndMaterials/Grid.tres" id="1_j0ml7"]
 [ext_resource type="Script" path="res://mallGenerator.gd" id="1_rylgc"]
-[ext_resource type="PackedScene" uid="uid://b7gngfkai7l5" path="res://Scenes/chunk.tscn" id="2_50ka6"]
 [ext_resource type="Script" path="res://camera.gd" id="17_a6ile"]
 
 [sub_resource type="Environment" id="Environment_kvuic"]
@@ -24,8 +23,6 @@ glow_enabled = true
 [node name="Mall" type="Node3D" parent="Map" node_paths=PackedStringArray("canvas")]
 script = ExtResource("1_rylgc")
 canvas = NodePath("../../CanvasLayer")
-
-[node name="Chunk" parent="Map/Mall" instance=ExtResource("2_50ka6")]
 
 [node name="TestingMap" type="CSGCombiner3D" parent="Map"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -64.1343, 0, -142.649)

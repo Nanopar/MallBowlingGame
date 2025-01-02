@@ -1,10 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://b7gngfkai7l5"]
+[gd_scene load_steps=5 format=3 uid="uid://b7gngfkai7l5"]
 
 [ext_resource type="Material" uid="uid://dxwe36ou1plyg" path="res://TexturesAndMaterials/Grid.tres" id="1_kobf5"]
+[ext_resource type="Texture2D" uid="uid://cmvu4oatcl1lr" path="res://addons/kenney_prototype_textures/purple/texture_10.png" id="2_bomlc"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o8k0w"]
 emission_enabled = true
 emission = Color(1, 1, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aovqn"]
+albedo_texture = ExtResource("2_bomlc")
 
 [node name="Chunk" type="Node3D"]
 
@@ -194,3 +198,95 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 
 material_override = SubResource("StandardMaterial3D_o8k0w")
 height = 0.0831493
 sides = 9
+
+[node name="4" type="Node3D" parent="Models"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 8)
+visible = false
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Models/4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -4)
+material_override = ExtResource("1_kobf5")
+use_collision = true
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="Models/4/CSGCombiner3D"]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -11.9, 3, 4)
+use_collision = true
+size = Vector3(16, 6, 0.2)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Models/4/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -0.5, 4)
+use_collision = true
+size = Vector3(16, 1, 16)
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="Models/4/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 6.5, 4)
+use_collision = true
+size = Vector3(16, 1, 16)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Models/4/CSGCombiner3D"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3.9, 3, 4)
+use_collision = true
+size = Vector3(16, 6, 0.2)
+
+[node name="SpotLight3D5" type="SpotLight3D" parent="Models/4"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 6, 0)
+light_energy = 9.995
+shadow_enabled = true
+spot_range = 15.561
+spot_attenuation = 0.7
+spot_angle = 89.0
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Models/4/SpotLight3D5"]
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, -3.43485)
+light_energy = 8.295
+spot_range = 8.667
+spot_angle = 69.8634
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Models/4/SpotLight3D5"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_o8k0w")
+height = 0.0831493
+sides = 9
+
+[node name="5" type="Node3D" parent="Models"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 4)
+visible = false
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Models/5"]
+material_override = ExtResource("1_kobf5")
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Models/5/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -0.5, 4)
+use_collision = true
+size = Vector3(16, 1, 16)
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="Models/5/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 6.5, 4)
+use_collision = true
+size = Vector3(16, 1, 16)
+
+[node name="SpotLight3D5" type="SpotLight3D" parent="Models/5"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -4, 6, 4)
+light_energy = 9.995
+shadow_enabled = true
+spot_range = 15.561
+spot_attenuation = 0.7
+spot_angle = 89.0
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Models/5/SpotLight3D5"]
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, -3.43485)
+light_energy = 8.295
+spot_range = 8.667
+spot_angle = 69.8634
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Models/5/SpotLight3D5"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_o8k0w")
+height = 0.0831493
+sides = 9
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Models/5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, 4)
+material_override = SubResource("StandardMaterial3D_aovqn")
+size = Vector3(2, 2, 2)
