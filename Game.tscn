@@ -13,7 +13,6 @@ background_color = Color(0.700612, 0.826437, 0.942001, 1)
 ambient_light_source = 2
 ambient_light_color = Color(0.342092, 0.359069, 0.434624, 1)
 tonemap_mode = 3
-ssr_enabled = true
 ssao_enabled = true
 sdfgi_y_scale = 0
 sdfgi_energy = 0.025
@@ -93,17 +92,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1.43652, -9.01845)
 size = Vector3(20, 3, 2)
 
 [node name="Lighting" type="Node3D" parent="Map"]
-visible = false
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Map/Lighting"]
 environment = SubResource("Environment_kvuic")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Map/Lighting"]
 transform = Transform3D(0.5, 0.575067, -0.647532, 0.866025, -0.332015, 0.373853, 0, -0.747705, -0.664031, 0, 0, 0)
+visible = false
 shadow_enabled = true
 
 [node name="ReflectionProbe" type="ReflectionProbe" parent="Map/Lighting"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -51.9783, 0, -132.935)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.9783, 0, 65.065)
+visible = false
 intensity = 0.8
 size = Vector3(91.563, 20, 125.853)
 
