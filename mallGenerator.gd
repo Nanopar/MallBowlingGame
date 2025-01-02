@@ -32,7 +32,7 @@ func gen():
 			else:
 				pick = models[0];
 			
-			if pick.name == "3":
+			if pick.name == "3" || pick.name == "6":
 				var Arotation = [0,90,180,270];
 				pick.rotation_degrees.y = Arotation.pick_random()
 			elif pick.name == "4":
