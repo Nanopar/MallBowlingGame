@@ -43,10 +43,10 @@ func gen():
 				var Arotation = [0,90];
 				pick.rotation_degrees.y = Arotation.pick_random()
 			pick.show();
-			for i in models:
-				if i != pick:
-					remove_child(i);
-					i.queue_free();
+			#for i in models:
+			#	if i != pick:
+			#		remove_child(i);
+			#		i.queue_free();
 			await get_tree().create_timer(0.00000000000000000001).timeout
 	await get_tree().create_timer(1).timeout
 	canvas.get_node("Generating").hide();
