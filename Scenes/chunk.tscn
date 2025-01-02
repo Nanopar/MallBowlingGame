@@ -275,7 +275,7 @@ height = 0.0831493
 sides = 9
 
 [node name="4" type="Node3D" parent="Models"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 8)
+transform = Transform3D(0.995781, 0, 0, 0, 0.995781, 0, 0, 0, 0.995781, 8, 0, 8)
 visible = false
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="Models/4"]
@@ -294,7 +294,7 @@ use_collision = true
 size = Vector3(4, 6, 0.4)
 
 [node name="CSGBox3D18" type="CSGBox3D" parent="Models/4/CSGCombiner3D"]
-transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -12, 3, 4)
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 4.00963, 3, 4.0034)
 use_collision = true
 size = Vector3(4, 6, 0.4)
 
