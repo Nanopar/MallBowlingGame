@@ -201,6 +201,7 @@ sides = 9
 
 [node name="4" type="Node3D" parent="Models"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 8)
+visible = false
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="Models/4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -4)
