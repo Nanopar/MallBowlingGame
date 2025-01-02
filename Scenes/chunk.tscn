@@ -304,6 +304,11 @@ transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -11.9, 3
 use_collision = true
 size = Vector3(16, 6, 0.2)
 
+[node name="CSGBox3D11" type="CSGBox3D" parent="Models/6/CSGCombiner3D"]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -11.9, 3, 4)
+use_collision = true
+size = Vector3(16, 6, 0.2)
+
 [node name="CSGBox3D" type="CSGBox3D" parent="Models/6/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -0.5, 4)
 use_collision = true
