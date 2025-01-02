@@ -11,7 +11,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if(Input.is_action_just_pressed("ui_paste")):
+	if(Input.is_action_just_pressed("regen")):
 		canvas.get_node("Generating").show();
 		await get_tree().create_timer(1).timeout
 		for n in get_children():

@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://vo6vi3qpiqjp"]
+[gd_scene load_steps=6 format=3 uid="uid://vo6vi3qpiqjp"]
 
 [ext_resource type="Material" uid="uid://dxwe36ou1plyg" path="res://TexturesAndMaterials/Grid.tres" id="1_j0ml7"]
 [ext_resource type="Script" path="res://mallGenerator.gd" id="1_rylgc"]
+[ext_resource type="PackedScene" uid="uid://yk7ucwnvv6jh" path="res://Scenes/gameplayer.tscn" id="4_rcyw2"]
 [ext_resource type="Script" path="res://camera.gd" id="17_a6ile"]
 
 [sub_resource type="Environment" id="Environment_kvuic"]
@@ -134,3 +135,6 @@ theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 3
 theme_override_font_sizes/font_size = 30
 text = "Generating..."
+
+[node name="Player" parent="." instance=ExtResource("4_rcyw2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.83972, 3.55479, 3.42477)

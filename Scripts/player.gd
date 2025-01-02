@@ -42,7 +42,9 @@ var topStepCollide = false;
 var bobbing = 0;
 var bobbingMultiplier = 0;
 var bobbingSpeed = 1;
+var isNoclip = false;
 @export var OFFLINE = false;
+
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -60,6 +62,7 @@ func _input(event):
 			else:
 				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE);
 	if event is InputEventMouseMotion:
+		if(isNoclip):return;
 		if is_free_looking:
 			$Neck.rotate_y(deg_to_rad(-event.relative.x * MOUSE_SENS))
 			$Neck.rotation.y = clamp($Neck.rotation.y, deg_to_rad(-120), deg_to_rad(120))
@@ -72,7 +75,17 @@ func _input(event):
 func _physics_process(delta):
 	if(!OFFLINE && !is_multiplayer_authority()):
 		return;
-
+	
+	if(Input.is_action_just_pressed("free_look")):
+		isNoclip = !isNoclip;
+		if(isNoclip):
+			$"../FreeLookCamera".global_position = get_node("Neck/Head/Eyes/Camera").global_position;
+			$"../FreeLookCamera".make_current();
+		else:
+			get_node("Neck/Head/Eyes/Camera").make_current();
+			
+	if(isNoclip):return;
+	
 	if(true):
 		if(bottomStepCollide && !topStepCollide):
 			global_position.y += 0.57;
