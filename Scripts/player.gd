@@ -23,6 +23,7 @@ var current_speed = 5.0
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var direction = Vector3.ZERO
 var is_walking = false
+var stamcd = false
 var is_sprinting = false
 var is_crouching = false
 var is_free_looking = false
@@ -242,7 +243,6 @@ func _physics_process(delta):
 var timerSprint = 0.005;
 var timerSlide = 0.025;
 var timerUnSprint = 0.001;
-var stamcd = false
 func handleSprintLimit(delta):
 	#print(current_speed == SLIDING_SPEED);
 	print("sprint: " + str(is_sprinting) + "  crouch: " + str(is_crouching) + "  slide: " + str(current_speed == SLIDING_SPEED) + " cd:" + str(stamcd))
