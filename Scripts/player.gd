@@ -241,9 +241,9 @@ func _physics_process(delta):
 	
 var timerSprint = 0.005;
 var timerSlide = 0.025;
-var timerUnSprint = 0.008;
+var timerUnSprint = 0;
 func handleSprintLimit(delta):
-	
+	 
 	##TODO: if sliding, decrease more energy
 		##  set sprint speed to walkspeed if energy is out
 	if(is_sprinting):
@@ -253,13 +253,14 @@ func handleSprintLimit(delta):
 			timerSprint = 0.005;
 		else:
 			timerSprint -= delta;
-	else:
+	elif !(is_sprinting) && !(Input.is_action_pressed("iswalk")):
 		if(timerUnSprint <= 0):
 			canvas.get_node("energyBar").frame += 1;
 			timerSprint = 0.008;
 		else:
 			timerSprint -= delta;
-
+	if (Input.is_action_pressed("iswalk")):
+		print("WALKSKDKSKDKASDGDUGDAUFYSDAYSDAIYSADDS")
 func _on_sliding_timer_timeout():
 	is_free_looking = false
 
