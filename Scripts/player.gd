@@ -243,21 +243,18 @@ var timerSprint = 0.005;
 var timerSlide = 0.025;
 var timerUnSprint = 0.001;
 func handleSprintLimit(delta):
-	print(current_speed == SLIDING_SPEED);
+	#print(current_speed == SLIDING_SPEED);
+	print("sprint: " + str(is_sprinting) + "  crouch: " + str(is_crouching) + "  slide: " + str(current_speed == SLIDING_SPEED))
 	##TODO: if sliding, decrease more energy
 		##  set sprint speed to walkspeed if energy is out
 	if(is_sprinting):
-		print("SPRINT")
+		#print("SPRINT")
 		if(timerSprint <= 0):
-			if(!current_speed == SLIDING_SPEED):
-				canvas.get_node("energyBar").frame -= 1;
-				timerSprint = 0.005;
-			else:
-				canvas.get_node("energyBar").frame -= 1;
-				timerSprint = 0.0005;
+			canvas.get_node("energyBar").frame -= 1;
+			timerSprint = 0.005;
 		else:
 			timerSprint -= delta;
-	
+
 	elif ((!(is_sprinting) && !(Input.is_action_pressed("iswalk"))) || (!(is_sprinting)) && is_crouching) && (current_speed != SLIDING_SPEED):
 		if(timerUnSprint <= 0):
 			if(!is_crouching):
@@ -266,18 +263,18 @@ func handleSprintLimit(delta):
 			else:
 				if(Input.is_action_pressed("iswalk")):
 					canvas.get_node("energyBar").frame += 1;
-					timerUnSprint = 0.18;
+					timerUnSprint = 0.085;
 				else:
 					canvas.get_node("energyBar").frame += 1;
 					timerUnSprint = 0.008;
 		else:
 			timerUnSprint -= delta;
 	
-	elif is_sprinting && is_crouching && current_speed == SLIDING_SPEED:
+	elif is_crouching && current_speed == SLIDING_SPEED:
 		if(timerSprint <= 0):
 			if current_speed == SLIDING_SPEED:
-				canvas.get_node("energyBar").frame -= 1;
-				timerSprint = 0.00005;
+				canvas.get_node("energyBar").frame -= 2;
+				timerSprint = 0.008;
 		else:
 			timerSprint -= delta;
 		pass
