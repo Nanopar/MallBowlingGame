@@ -152,5 +152,5 @@ scale = Vector2(100.55, 2.80367)
 texture = ExtResource("6_u0xeo")
 
 [node name="Player" parent="." node_paths=PackedStringArray("canvas") instance=ExtResource("4_rcyw2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.68783, 3.55479, 3.42477)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.04493, 3.55479, 20.6529)
 canvas = NodePath("../CanvasLayer")

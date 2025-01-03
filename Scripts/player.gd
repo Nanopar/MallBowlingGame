@@ -108,7 +108,6 @@ func _physics_process(delta):
 		wiggle_current_intensity = WIGGLE_ON_CROUCHING_INTENSITY
 		wiggle_index += WIGGLE_ON_CROUCHING_SPEED * delta
 		if is_sprinting and input_dir != Vector2.ZERO and is_on_floor():
-			
 			$SlidingTimer.start()
 			slide_vector = input_dir
 		elif !Input.is_action_pressed("sprint"):

@@ -28,10 +28,15 @@ func gen():
 			newChunk.global_position.z = y * 16;
 			var models = newChunk.get_node("Models").get_children();
 			for i in models:
+				var e = i.get_node("blocks").get_children()
+				for c in e:
+					c.collision_shape.disabled = true;
 				i.hide();
 
 			var pick;
-			if(randi_range(0,10) >= 4):
+			if(true):
+				pick = models[0];
+			elif(randi_range(0,10) >= 4):
 				pick = models.pick_random();
 			else:
 				pick = models[0];
@@ -43,6 +48,9 @@ func gen():
 				var Arotation = [0,90];
 				pick.rotation_degrees.y = Arotation.pick_random()
 			pick.show();
+			var e = pick.get_node("blocks").get_children()
+			for c in e:
+				c.collision_shape.disabled = false;
 			#for i in models:
 			#	if i != pick:
 			#		remove_child(i);
