@@ -257,9 +257,8 @@ func handleSprintLimit(delta):
 				timerSprint = 0.0005;
 		else:
 			timerSprint -= delta;
-
 	
-	elif (!(is_sprinting) && !(Input.is_action_pressed("iswalk"))) || (!(is_sprinting) && is_crouching && !current_speed == SLIDING_SPEED):
+	elif ((!(is_sprinting) && !(Input.is_action_pressed("iswalk"))) || (!(is_sprinting)) && is_crouching) && (current_speed != SLIDING_SPEED):
 		if(timerUnSprint <= 0):
 			if(!is_crouching):
 				canvas.get_node("energyBar").frame += 1;
@@ -273,6 +272,15 @@ func handleSprintLimit(delta):
 					timerUnSprint = 0.008;
 		else:
 			timerUnSprint -= delta;
+	
+	elif is_sprinting && is_crouching && current_speed == SLIDING_SPEED:
+		if(timerSprint <= 0):
+			if current_speed == SLIDING_SPEED:
+				canvas.get_node("energyBar").frame -= 1;
+				timerSprint = 0.00005;
+		else:
+			timerSprint -= delta;
+		pass
 func _on_sliding_timer_timeout():
 	is_free_looking = false
 
