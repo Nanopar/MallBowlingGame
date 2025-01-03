@@ -14,17 +14,9 @@ ambient_light_source = 2
 ambient_light_color = Color(0.342092, 0.359069, 0.434624, 1)
 tonemap_mode = 3
 ssao_enabled = true
-ssao_radius = 1.03
-ssao_intensity = 3.58
-ssao_detail = 0.0
-ssao_horizon = 0.0
-ssao_light_affect = 1.0
-ssao_ao_channel_affect = 1.0
 sdfgi_y_scale = 0
 sdfgi_energy = 0.025
 glow_enabled = true
-volumetric_fog_enabled = true
-volumetric_fog_density = 0.0686
 
 [node name="Node3D" type="Node3D"]
 
