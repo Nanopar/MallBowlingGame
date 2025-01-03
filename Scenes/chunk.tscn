@@ -1501,69 +1501,59 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 script = ExtResource("2_8imq5")
 mesh_vector_data = SubResource("Resource_r2udo")
 materials = Array[Material]([ExtResource("1_kobf5")])
-collision_type = 0
 
 [node name="Block_1" type="Node3D" parent="Models/3/blocks"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
 script = ExtResource("2_8imq5")
 mesh_vector_data = SubResource("Resource_qwj2y")
 materials = Array[Material]([ExtResource("1_kobf5")])
-collision_type = 0
 
 [node name="block7" type="Node3D" parent="Models/3/blocks"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 14)
 script = ExtResource("2_8imq5")
 mesh_vector_data = SubResource("Resource_3serd")
 materials = Array[Material]([ExtResource("1_kobf5")])
-collision_type = 0
 
 [node name="block8" type="Node3D" parent="Models/3/blocks"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 14)
 script = ExtResource("2_8imq5")
 mesh_vector_data = SubResource("Resource_3serd")
 materials = Array[Material]([ExtResource("1_kobf5")])
-collision_type = 0
 
 [node name="block9" type="Node3D" parent="Models/3/blocks"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 1)
 script = ExtResource("2_8imq5")
 mesh_vector_data = SubResource("Resource_3serd")
 materials = Array[Material]([ExtResource("1_kobf5")])
-collision_type = 0
 
 [node name="block2" type="Node3D" parent="Models/3/blocks"]
 script = ExtResource("2_8imq5")
 mesh_vector_data = SubResource("Resource_errah")
 materials = Array[Material]([ExtResource("1_kobf5")])
-collision_type = 0
 
 [node name="block4" type="Node3D" parent="Models/3/blocks"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 0)
 script = ExtResource("2_8imq5")
 mesh_vector_data = SubResource("Resource_errah")
 materials = Array[Material]([ExtResource("1_kobf5")])
-collision_type = 0
 
 [node name="block5" type="Node3D" parent="Models/3/blocks"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 15)
 script = ExtResource("2_8imq5")
 mesh_vector_data = SubResource("Resource_errah")
 materials = Array[Material]([ExtResource("1_kobf5")])
-collision_type = 0
 
 [node name="block3" type="Node3D" parent="Models/3/blocks"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 script = ExtResource("2_8imq5")
 mesh_vector_data = SubResource("Resource_8uefp")
 materials = Array[Material]([ExtResource("1_kobf5")])
-collision_type = 0
 
 [node name="block10" type="Node3D" parent="Models/3/blocks"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 16)
 script = ExtResource("2_8imq5")
 mesh_vector_data = SubResource("Resource_5ax1k")
 materials = Array[Material]([ExtResource("1_kobf5")])
-collision_type = 0
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Models/3"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -2, 0)
