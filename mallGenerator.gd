@@ -34,9 +34,7 @@ func gen():
 				i.hide();
 
 			var pick;
-			if(true):
-				pick = models[0];
-			elif(randi_range(0,10) >= 4):
+			if(randi_range(0,10) >= 4):
 				pick = models.pick_random();
 			else:
 				pick = models[0];
