@@ -149,7 +149,7 @@ text = "Generating..."
 
 [node name="energyBar" type="Sprite2D" parent="CanvasLayer"]
 texture_filter = 1
-position = Vector2(669, 693)
+position = Vector2(630, 693)
 scale = Vector2(6.56, 3.89286)
 texture = ExtResource("5_v2ed1")
 vframes = 101

@@ -196,7 +196,7 @@ func _physics_process(delta):
 		if last_velocity.y <= -7.5:
 			$Neck/Head/Eyes/AnimationPlayer.play("landing")
 	
-	if Input.is_action_pressed("jump") and is_on_floor():
+	if Input.is_action_just_pressed("jump") and is_on_floor():
 		$Neck/Head/Eyes/AnimationPlayer.play("jump")
 		if !$SlidingTimer.is_stopped():
 			velocity.y = JUMP_VELOCITY * 1.25
@@ -308,16 +308,28 @@ func newHandleSprintLimit(delta):
 	#print(isAllowedToSprint);
 	if(Input.is_action_pressed("iswalk") && round(velocity) != Vector3.ZERO): ##This code only works if the player is moving
 		if(is_sprinting) : ##if it's JUST sprinting.
-			#print("SPRINT")
+			print("SPRINTING")
 			if(timerSprint <= 0):
 				if canvas.get_node("energyBar").frame > 0:
 					canvas.get_node("energyBar").frame -= 1;
 				timerSprint = 0.005;
 			else:
 				timerSprint -= delta;
+		elif(is_on_floor() && is_crouching && Input.is_action_just_pressed("jump") && !stamcd ): ##if it's sliding and jumping, punish the player lmao
+			print("SLIDE JUMPING")
+			var b = canvas.get_node("energyBar").frame - 25
+			var e = create_tween().set_ease(Tween.EASE_OUT);
+			e.tween_property(canvas.get_node("energyBar"), "frame", b, 0.25);
+			#if(timerSprint <= 0):
+			#	if canvas.get_node("energyBar").frame > 0:
+			#		canvas.get_node("energyBar").frame -= 2;
+			#	timerSprint = 0.008;
+			#else:
+			#	timerSprint -= delta;
 		elif(!is_sprinting && ($SlidingTimer.time_left == 0)) : ##if it's JUST walking AND not sliding, still regen, even if it's moving.
 			processRegenCode(delta);
 		elif(($SlidingTimer.time_left != 0)): ##if it's JUST sliding
+			print("SLIDING")
 			if(timerSprint <= 0):
 				if current_speed == SLIDING_SPEED:
 					canvas.get_node("energyBar").frame -= 2;
