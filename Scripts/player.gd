@@ -275,7 +275,6 @@ func handleSprintLimit(delta):
 		else:
 			timerSprint -= delta;
 	elif ((!(is_sprinting) && !(Input.is_action_pressed("iswalk"))) || ((!(is_sprinting)) && is_crouching) && (current_speed != SLIDING_SPEED)):
-		
 		if(timerUnSprint <= 0):
 			if(!is_crouching):
 				canvas.get_node("energyBar").frame += 1;
@@ -328,16 +327,16 @@ func newHandleSprintLimit(delta):
 			#	timerSprint -= delta;
 		elif(!is_sprinting && ($SlidingTimer.time_left == 0)) : ##if it's JUST walking AND not sliding, still regen, even if it's moving.
 			processRegenCode(delta);
-		elif(($SlidingTimer.time_left != 0)): ##if it's JUST sliding
+		elif((ceil($SlidingTimer.time_left) != 0.0)): ##if it's JUST sliding
 			print("SLIDING")
 			if(timerSprint <= 0):
-				if current_speed == SLIDING_SPEED:
-					canvas.get_node("energyBar").frame -= 2;
-					timerSprint = 0.008;
+				canvas.get_node("energyBar").frame -= 1;
+				timerSprint = 0.008;
 			else:
 				timerSprint -= delta;
 	else: ##Otherwise, if it's not moving
 		processRegenCode(delta);
+	print(ceil($SlidingTimer.time_left));
 	print(canvas.get_node("energyBar").frame);
 	match(canvas.get_node("energyBar").frame): ##Do checking if energy bar is either zero or a hundereud
 		100:
