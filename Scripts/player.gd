@@ -263,7 +263,7 @@ func handleSprintLimit(delta):
 		SPRINTING_SPEED = ORIG_SPRINTING_SPEED;
 	
 	#print(current_speed == SLIDING_SPEED);
-	print("sprint: " + str(is_sprinting) + "  crouch: " + str(is_crouching) + "  slide: " + str(current_speed == SLIDING_SPEED) + " cd:" + str(stamcd))
+	#print("sprint: " + str(is_sprinting) + "  crouch: " + str(is_crouching) + "  slide: " + str(current_speed == SLIDING_SPEED) + " cd:" + str(stamcd))
 	##TODO: if sliding, decrease more energy
 		##  set sprint speed to walkspeed if energy is out [/]
 	if(is_sprinting) :
@@ -332,8 +332,15 @@ func newHandleSprintLimit(delta):
 			if(timerSprint <= 0):
 				canvas.get_node("energyBar").frame -= 1;
 				timerSprint = 0.008;
+
+				if current_speed == SLIDING_SPEED:
+					canvas.get_node("energyBar").frame -= 2;
+					timerSprint = 0.008;
+				print("why sliding")
+
 			else:
 				timerSprint -= delta;
+		print($SlidingTimer.time_left)
 	else: ##Otherwise, if it's not moving
 		processRegenCode(delta);
 	print(ceil($SlidingTimer.time_left));
